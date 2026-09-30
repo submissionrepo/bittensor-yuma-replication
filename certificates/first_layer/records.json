@@ -148,5 +148,16 @@
     "date": "2026-09-30",
     "paper": "bittensor_yuma",
     "note": "Finite substitution only; the general equilibrium argument, monotonicity and asymptotic claims are not certified. Twelve old KY values loaded from the saved 20260929 table, not re-verified."
+  },
+  "bittensor_paper_a_repair_algebra_20260930": {
+    "statement": "Exact clipping and reflection payoff identities, the affine honest-continuation Bellman/tower identities, and the soft-weight necessary-threshold factorization and Bernstein upper bound pass 14 exact identity/sign records.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/bittensor_paper_a/repair_checks.py; repair_checks.json; repair_checks.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "Algebraic scope only. Strategy implementability, filtration assumptions and the full infinite-horizon comparison require the repaired manuscript proof and its independent audit. The initial sign-basis harness failure is recorded separately."
   }
 }

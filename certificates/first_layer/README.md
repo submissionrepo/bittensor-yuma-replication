@@ -1,10 +1,11 @@
 # First layer: exact and symbolic computations
 
-[records.json](records.json) reproduces the 14 selected original records, with
-their statements, layers, dates, evidence, and limitations. These are reused
-results from 2026-09-29 and 2026-09-30, not new independent runs. The dates in
-the records describe the original computations. Later proof audits are listed
-separately in the [verification index](../README.md).
+[records.json](records.json) reproduces 15 computational records, including
+the new algebra supporting the manuscript repairs, with their statements,
+layers, dates, evidence, and limitations. After the repairs, all 14 generators
+were rerun successfully; the [replay record](replay.json) and [raw log](replay.md)
+document that run. The dates in the original records remain their original
+dates. Independent proof audits are listed in the [verification index](../README.md).
 
 `exact` denotes the stated rational/finite certificate; `sympy` denotes the
 stated symbolic calculation. Finite enumerations and numerical LP agreement
@@ -31,6 +32,7 @@ discovery calculations. Their numerical output is not additional proof evidence.
 | Persistence, three validators | Symbolic identities and rational substitutions. Numerical LP matches are discovery only. | `research_ideas/probes/bittensor/dynamic_memoryless_probe.py` |
 | Persistence, larger committees | 52 symbolic identities at n=3,5,7,9; not the arbitrary-n history-dependent equilibrium theorem. | `research_ideas/probes/bittensor/dynamic_frontier_general_probe.py` |
 | Threshold table | 63 new rational substitutions for odd n=11 through 51, combined with 12 reused points. | `research_ideas/bittensor_paper_a/threshold_table.py` |
+| Repair algebra | Fourteen exact clipping/reflection, affine-continuation/Bayes, and soft-threshold identity/sign records; not a substitute for the full strategy arguments. | `research_ideas/bittensor_paper_a/repair_checks.py` |
 
 ## Reproduce the calculations
 
@@ -50,6 +52,7 @@ python research_ideas/probes/bittensor/dynamic_pooling_certificate.py
 python research_ideas/probes/bittensor/dynamic_memoryless_probe.py
 python research_ideas/probes/bittensor/dynamic_frontier_general_probe.py
 python research_ideas/bittensor_paper_a/threshold_table.py
+python research_ideas/bittensor_paper_a/repair_checks.py
 ```
 
 The scripts write outputs beside themselves. Saved outputs are included, so running these commands is optional for reading the certificates. The software smoke test is a separate check.

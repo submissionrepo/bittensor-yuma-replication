@@ -799,8 +799,7 @@ discount the future and may deviate using their entire private and public
 history.
 
 \begin{theorem}[Frontier with persistence]\label{thm:memory}
-At $\delta=0$, feasibility is $\eta\le\Gs$ and Theorem~\ref{thm:frontier} gives
-the frontier. For $\delta>0$, let $\Lambda=(p/q)^n$ and $\Pi\in[1/2,1)$ solve
+Let $\Lambda=(p/q)^n$ and let $\Pi\in[1/2,1)$ solve
 $\Pi=\frac{1-\rho}2+\rho\frac{\Lambda\Pi}{1+(\Lambda-1)\Pi}$.
 If $\Pi\ge p$, no rule of this kind supports honest evaluation. If $\Pi<p$, let
 $G_\rho=2(p-\Pi)\Gs/d$; honest evaluation can be supported if and only if
@@ -819,7 +818,7 @@ The number $\Pi$ is the most confident belief a validator can hold before
 evaluating, reached after long runs of unanimous reports. A validator whose
 belief is $\pi$ gains $2(p-\pi)G(v)/d$ from evaluating, which vanishes as $\pi$
 approaches $p$: at that point a fresh signal can no longer overturn what the
-history already says. For $\delta>0$, the most confident history binds. In
+history already says. The constraint binds at the most confident history. In
 the running example $\rho_c=41/80$, so fresh evaluation stops paying once the
 better miner stays better with probability $(1+\rho_c)/2=121/160$.
 
@@ -1288,8 +1287,7 @@ Q^*=\frac12+\frac{d(1+t)}2\min\Bigl\{1,\frac{Vd^2-6\eta}{\omega M(\frac12+3t)}\B
 \]
 
 \begin{proof}[Proof of Theorem~\ref{thm:memory}]
-At $\delta=0$, only the initial static game counts. For $\delta>0$, we bound
-belief $\pi$. Each round reveals at most
+We first bound the pre-acquisition belief $\pi$. Each round reveals at most
 $n$ fresh signals, giving likelihood ratio in $[\Lambda^{-1},\Lambda]$.
 The Markov transition confines $\pi$ to $[1-\Pi,\Pi]$; unanimous honest
 histories approach both endpoints. A blind report $1$ has affine validation

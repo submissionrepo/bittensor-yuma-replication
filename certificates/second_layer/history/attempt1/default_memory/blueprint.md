@@ -1,8 +1,12 @@
-# Candidate proof packet: repaired manuscript
+# Candidate proof packet
 
-Verbatim environments and application text. The accompanying full manuscript is authoritative; no additional proof is supplied here.
+Verbatim theorem and proof environments from the manuscript. The complete source is supplied for all definitions and equations. No missing argument has been added.
 
-## thm:default
+# lemma thm:default
+
+## statement
+
+Source paper.tex line 722.
 
 \begin{theorem}[Default parameters]\label{thm:default}
 Let $n=3$, $p=3/4$, $V=M=1/2$, $\alpha=1/10$, discount factor $\delta=99/100$,
@@ -20,12 +24,48 @@ $|\beta_i|\le1$.
 \end{enumerate}
 \end{theorem}
 
-Source paper.tex line 1128.
+## proof
+
+Source paper.tex line 738.
+
+\begin{proof}[Proof sketch]
+Appendix~\ref{app:yuma} lists the certificates; here we outline the argument.
+For part~(ii) we fix the other two validators at $\ell=49/100$. A deviator's
+state reduces to the difference $D$ between its bonds in the two miners, and
+$|D|\le1/2$ under every deviation. In units of $V$, the old bonds contribute
+$(1-\alpha)D(I-\frac12)$ to the round's payoff, where $I$ is miner $1$'s share. We let $\psi(D,x)$ be the deviator's
+one-round payoff from weight $x$, including the value of the bonds it buys, and
+choose the potential $\Phi(D)=\frac1{20}\bigl(|D|-\frac1{20}\bigr)_+$. For all
+$D\in[-1/2,1/2]$ and $x\in[0,1]$,
+\[
+\psi(D,x)-\psi(D,\ell)+\delta\,\E\Phi(D')-\Phi(D)\le-\varepsilon|x-\ell|,\qquad \varepsilon=\frac1{1000},
+\]
+where $D'$ is the next bond difference. The inequality splits into $324$
+univariate rational inequalities, each certified by nonnegative Bernstein
+coefficients. Summing it over rounds telescopes the potential and bounds every
+multi-round deviation by the payoff of $\ell$-honesty. Ownership up to $1/2000$
+uses part of the margin $\varepsilon$, and skipping the evaluation loses at
+least $\varepsilon(1-2\ell)/2$ per round, which covers the cost. For part~(i),
+a finite run of rounds in which the deviator's signal is $1$ and the others'
+are $0$ pushes $D$ toward its honest maximum, where the payoff's right
+derivative in $x$ at $x=\ell$ is positive for every $\ell\in(0,2/5]$; the case
+$\ell=0$ fails in the first round. For part~(iii), when the others submit $1/2$
+a deviator's current share of each miner never exceeds $1/n$, so no deviation
+earns more than $V/n$ per round in validator pay. A reflection argument bounds
+what a deviator gains through its ownership, and the ownership share this
+equilibrium tolerates is
+\[
+\frac VM\cdot\frac{2\alpha(n-1)}{n}\cdot\frac{1-\delta(1-\alpha)/(2n-1)}{1-\delta(1-\alpha)}=\frac{8218}{8175}>1.\qedhere
+\]
+\end{proof}
+
+Source paper.tex line 1155.
 
 \begin{proof}[Proof of Theorem~\ref{thm:default}]
-For parts~(i) and~(ii), we fix the others at $\ell$-honesty with $\ell>0$;
-the zero endpoint is treated separately. We write $r=1-\alpha$ and
-$z=\delta r$, let $B_1,B_0$ be the deviator's
+The Bernstein certificates, the $18$ derivative bounds and the profitable
+deviations are in the replication package; here we assemble the argument.
+Throughout, the other two validators are $\ell$-honest and we follow one
+deviator. We write $r=1-\alpha$ and $z=\delta r$, let $B_1,B_0$ be the deviator's
 bonds, and set $S=B_1+B_0$ and $D=B_1-B_0$. For weight $x$ and a count $k$ of
 other reports for miner $1$, let $I(x,k)$ be miner $1$'s share and
 $\Delta_j(x,k)$ the deviator's current share of miner $j$. The other validators
@@ -86,28 +126,13 @@ $\ell$-honesty, is strictly profitable. For $\ell=0$ the deviation pays in the
 first round: with signal $0$ and equal initial bonds, weight $1/100$ on
 miner $1$ raises the discounted payoff by $53506799/2288569920$.
 
-\emph{Part (iii).} We fix opponents at $1/2$ and take $\beta_i\ge0$ by
-symmetry. Write $Z_j=1/n-B_j$, $Z=Z_1+Z_0$, and $I=1/2+\sigma\xi$, where
-$\sigma\in\{-1,1\}$ and $0\le\xi\le\bar\xi=1/(4n-2)$. Clipping gives fresh
-shares $1/n$ and $1/n-\chi\xi/(1-2\xi)$, $\chi=4(n-1)/n$, on the favored
-and other miner. Thus $Z_j\ge0$ and $Z'=rZ+\alpha\chi\xi/(1-2\xi)$.
-We simulate any strategy from the same observations and randomization,
-keeping acquisition choices but reflecting reports toward miner $1$.
-Fixed opponents make this implementable. Reflection preserves $Z$ and sets
-$Z_1=0$; its payoff advantage is
-$2V\xi Z_1'\ge0$ if $\sigma=1$, and $2\xi(VZ_0'+\beta_iM)\ge0$ otherwise,
-using the original path's updated deficits. For a reflected path the gross
-gain is $g=(\beta_iM-\alpha V\chi/2)\xi-VrZ(1/2-\xi)$.
-We set $\Psi(Z)=-\zeta Z$, $\zeta=Vr(1/2-\bar\xi)/(1-\delta r)$ and
-$\bar\beta=(\alpha V\chi/2+\delta\alpha\zeta\chi)/M$. Then
-\begin{align*}
-g+\delta\Psi(Z')-\Psi(Z)
-&=-VrZ(\bar\xi-\xi)-(\bar\beta-\beta_i)M\xi\\
-&\quad-\frac{2\delta\alpha\zeta\chi\xi^2}{1-2\xi}\le0
-\end{align*}
-for $\beta_i\le\bar\beta$. Since the initial deficits vanish and $\Psi$ is
-bounded, discounted summation excludes every such path; acquisition costs
-only lower its payoff. At the stated parameters,
-$\bar\beta=8218/8175>1$.\qedhere
+\emph{Part (iii).} If the others put weight $\frac12$ on each miner, a
+deviator's current share of each miner is at most $1/n$ whatever its weight,
+and the rate-$\alpha$ average keeps its bonds at most $1/n$. Its validator pay is
+therefore at most $V/n$ per round, which not evaluating and submitting $\frac12$
+attains. A reflection argument bounds the gain from ownership, and with $n=3$,
+$\alpha=\frac1{10}$, $\delta=\frac{99}{100}$ and $V=M$ the tolerated ownership is
+\[
+\frac VM\cdot\frac{2\alpha(n-1)}{n}\cdot\frac{1-\delta(1-\alpha)/(2n-1)}{1-\delta(1-\alpha)}=\frac{8218}{8175}>1.\qedhere
+\]
 \end{proof}
-

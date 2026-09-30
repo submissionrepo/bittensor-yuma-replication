@@ -1,0 +1,11 @@
+{
+  "statement": "All 14 first-layer generators reran successfully after the explicit zero-discount/static branch was added to the final 12-page manuscript.",
+  "verified": [
+    "exact",
+    "sympy"
+  ],
+  "evidence": "research_ideas/bittensor_paper_a/first_layer_replay_final_20260930.md, second replay block; the same 15 computational records and their scripts",
+  "date": "2026-09-30",
+  "paper": "bittensor_yuma",
+  "note": "Same algebraic and finite scopes, no extension to universal proof by numerical sampling. The delta=0 branch uses the established static result; its correctness and the positive-discount persistence proof are covered by the separate attempt3 LLM audit."
+}

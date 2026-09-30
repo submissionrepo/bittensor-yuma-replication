@@ -1,10 +1,11 @@
-# Final boundary-corrected proof packet
+# Candidate proof packet: repaired manuscript
 
-Verbatim statement and complete proof from the final manuscript.
+Verbatim environments and application text. The accompanying full manuscript is authoritative; no additional proof is supplied here.
+
+## thm:memory
 
 \begin{theorem}[Frontier with persistence]\label{thm:memory}
-At $\delta=0$, feasibility is $\eta\le\Gs$ and Theorem~\ref{thm:frontier} gives
-the frontier. For $\delta>0$, let $\Lambda=(p/q)^n$ and $\Pi\in[1/2,1)$ solve
+Let $\Lambda=(p/q)^n$ and let $\Pi\in[1/2,1)$ solve
 $\Pi=\frac{1-\rho}2+\rho\frac{\Lambda\Pi}{1+(\Lambda-1)\Pi}$.
 If $\Pi\ge p$, no rule of this kind supports honest evaluation. If $\Pi<p$, let
 $G_\rho=2(p-\Pi)\Gs/d$; honest evaluation can be supported if and only if
@@ -19,9 +20,10 @@ $\rho\ge\rho_c=d\,\frac{p^{n+1}+q^{n+1}}{p^{n+1}-q^{n+1}}$, and $\rho_c$
 decreases to $d$ as $n$ grows.
 \end{theorem}
 
+Source paper.tex line 1289.
+
 \begin{proof}[Proof of Theorem~\ref{thm:memory}]
-At $\delta=0$, only the initial static game counts. For $\delta>0$, we bound
-belief $\pi$. Each round reveals at most
+We first bound the pre-acquisition belief $\pi$. Each round reveals at most
 $n$ fresh signals, giving likelihood ratio in $[\Lambda^{-1},\Lambda]$.
 The Markov transition confines $\pi$ to $[1-\Pi,\Pi]$; unanimous honest
 histories approach both endpoints. A blind report $1$ has affine validation
@@ -53,3 +55,4 @@ damped majority and majority sharing; at $\omega=0$, full majority is feasible
 exactly when $\eta\le G_\rho$. Setting $\Pi=p$ in its fixed-point equation gives
 $\rho_c=d(p^{n+1}+q^{n+1})/(p^{n+1}-q^{n+1})$.\qedhere
 \end{proof}
+

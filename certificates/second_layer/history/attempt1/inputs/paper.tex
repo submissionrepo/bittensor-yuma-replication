@@ -323,7 +323,7 @@ questions.
 \section{Model}
 \label{sec:model}
 
-\paragraph{Validators, miners and evaluations.} A round has $n=2m+1\ge3$
+\paragraph{Validators, miners and evaluations.} A round has $n=2m+1$
 validators with equal stake and two miners, labeled $0$ and $1$;
 Section~\ref{sec:extensions} allows unequal stake. One miner serves better than
 the other. The state $\theta\in\{0,1\}$ names the better miner, and each value
@@ -374,11 +374,6 @@ for every ownership profile in $[-\omega,\omega]^n$: when the others evaluate
 honestly, no validator gains, whatever its ownership, by skipping the
 evaluation, by reporting against its signal, or by randomizing. The definition
 asks for existence; other equilibria may coexist with honest evaluation.
-
-\paragraph{Repeated rounds.} Given the exogenous state path, signals are
-independent across validators and rounds, with accuracy $p$. Validators
-observe only purchased signals and public post-round reports, use independent
-private randomization, and discount by $\delta\in[0,1)$.
 
 \paragraph{Quality.} The \emph{quality} of a rule is the expected share of the
 miner budget paid to the better miner under honest evaluation,
@@ -481,20 +476,17 @@ an allocation as a mixture of symmetric threshold rules and shows that the
 majority threshold earns the most quality per unit of influence.
 
 \begin{theorem}[Frontier]\label{thm:frontier}
-Let $0\le\eta\le\Gs$. For $\omega>0$, the largest quality of a rule in $\Rset$
+Let $0\le\eta\le\Gs$ and $\omega>0$. The largest quality of a rule in $\Rset$
 that supports honest evaluation at cost $\eta$ and ownership bound $\omega$ is
 \[
 Q^*(\omega)=\frac12+\Bigl(\Qmaj-\frac12\Bigr)\min\Bigl\{1,\frac{2(\Gs-\eta)}{\omega Mb}\Bigr\}.
 \]
 The damped majority rule of strength
 $\lambda^*=\min\{1,2(\Gs-\eta)/(\omega Mb)\}$ with majority sharing attains it.
-At $\omega=0$, the optimum is $Q^*(0)=\Qmaj$, attained with $\lambda^*=1$.
 \end{theorem}
 
 \begin{proof}
-At $\omega=0$, majority sharing supports full majority allocation because
-$\eta\le\Gs$; Lemma~\ref{lem:influence} gives its optimality. We now take
-$\omega>0$ and combine the three lemmas. A rule that supports honest evaluation has
+We combine the three lemmas. A rule that supports honest evaluation has
 $H(a)\le2(G(v)-\eta)/(\omega M)\le2(\Gs-\eta)/(\omega M)$ by
 Lemmas~\ref{lem:ic} and~\ref{lem:rent}, and Lemma~\ref{lem:influence} then gives
 \[
@@ -510,16 +502,16 @@ $\lambda=\lambda^*$ its quality is
 \]
 \end{proof}
 
-With free evaluation and $\omega>0$, the frontier reads $Q^*(\omega)=\frac12+(\Qmaj-\frac12)\min\{1,K/\omega\}$
+With free evaluation the frontier reads $Q^*(\omega)=\frac12+(\Qmaj-\frac12)\min\{1,K/\omega\}$
 with the ownership threshold
 \begin{equation}\label{eq:K}
 K=\frac{2\Gs}{Mb}=\frac VM\cdot\frac{d(\Qmaj-p)}{npq\,b}.
 \end{equation}
-For a positive ownership bound the designer sets the damping at
+A designer who knows the ownership bound sets the damping at
 $\lambda^*=\min\{1,K/\omega\}$; nothing else about the rule depends on
 $\omega$. In the running example $\Gs=V/24$ and $K=2/9$, and for $\omega=1$ the
 frontier is $83/144$. A positive cost lowers the threshold to
-$K(1-\eta/\Gs)$, and at $\eta=\Gs$ only the even split remains when $\omega>0$.
+$K(1-\eta/\Gs)$, and at $\eta=\Gs$ only the even split remains.
 
 \section{Yuma}
 \label{sec:yuma}
@@ -532,11 +524,9 @@ Yuma takes the median of the validators' weights on that miner and clips every
 weight above the median down to the median. Miner $1$ receives the share of $M$
 equal to its total clipped weight divided by the total clipped weight on both
 miners. Validators are paid through bonds: validator $i$'s current share of a
-miner is its clipped weight divided by that miner's total clipped weight.
-If this total is zero, all current shares in that miner are zero. Each round
-we form the rate-$\alpha$ average of old bonds and current shares, with
-$\alpha\in(0,1]$, and normalize each positive bond column to sum to one; a zero
-column remains zero. Using these updated bonds, validator $i$ receives
+miner is its clipped weight on that miner divided by the miner's total clipped
+weight, and its bond $B_{ij}$ in miner $j$ moves toward this current share at
+rate $\alpha\in(0,1]$ each round. Validator $i$ then receives
 $V\bigl(B_{i1}a+B_{i0}(1-a)\bigr)$, where $a$ is miner $1$'s share. Subtensor's
 default is $\alpha=1/10$; at $\alpha=1$ bonds equal current shares, and we say
 that bond memory is switched off. We call \emph{$\ell$-honest}, for
@@ -589,8 +579,8 @@ We take a profile in which $k>m$ validators put all weight on miner $1$. The
 median weight is $1$ on miner $1$ and $0$ on miner $0$. Clipping removes every
 weight the minority placed on miner $1$ and every weight the majority placed on
 miner $0$, so miner $1$ receives $M$ and each majority validator holds a
-current share $1/k$ of miner $1$, while the minority holds nothing of it.
-The zero column for miner $0$ contributes no payment. The payments are $V/k$ to each majority validator and $0$ to the others, and
+current share $1/k$ of miner $1$, while the minority holds nothing of it. The
+payments are $V/k$ to each majority validator and $0$ to the others, and
 unanimity pays $V/n$ each. Lemma~\ref{lem:ic} with $H=b$ and $G=\Gs$ turns the
 equilibrium condition into
 \[
@@ -644,6 +634,21 @@ $k>m$ & minority & $1$ & $Vx/(k+x)$ \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{proof}[Proof sketch]
+We outline the argument; Appendix~\ref{app:yuma} has the details. The
+validator's pay in each case is in Table~\ref{tab:cases}. Against the worst ownership sign, the gain of weight $x$ over weight $0$
+is
+\[
+F(x)=Vx\Bigl[\sum_{k>m}\frac{w_k}{k+x}-\sum_{k<m}\frac{w_k(n-k-1)}{(n-k)(n-k-x)}\Bigr]+\omega Mbx .
+\]
+Every term is strictly concave in $x$ and $F(0)=0$, so weight $0$ is optimal
+exactly when $F'(0)=-VS_n(p)+\omega Mb\le0$. With $\omega=0$ we have
+$F(1)=-2\Gs$, and strict concavity gives $F'(0)>F(1)$, that is,
+\[
+VS_n(p)<2\Gs,\qquad\text{so}\qquad \KY<K.\qedhere
+\]
+\end{proof}
 
 The three rows of Table~\ref{tab:cases} are the hedging account of the
 introduction: a small weight on miner $1$ costs a little when the validator
@@ -730,8 +735,38 @@ $|\beta_i|\le1$.
 \end{enumerate}
 \end{theorem}
 
-The term $(1-\alpha)D(I-\frac12)$, with bond difference $D=B_{i1}-B_{i0}$
-and miner $1$'s share $I$, explains part~(i). A validator whose bonds
+\begin{proof}[Proof sketch]
+Appendix~\ref{app:yuma} lists the certificates; here we outline the argument.
+For part~(ii) we fix the other two validators at $\ell=49/100$. A deviator's
+state reduces to the difference $D$ between its bonds in the two miners, and
+$|D|\le1/2$ under every deviation. In units of $V$, the old bonds contribute
+$(1-\alpha)D(I-\frac12)$ to the round's payoff, where $I$ is miner $1$'s share. We let $\psi(D,x)$ be the deviator's
+one-round payoff from weight $x$, including the value of the bonds it buys, and
+choose the potential $\Phi(D)=\frac1{20}\bigl(|D|-\frac1{20}\bigr)_+$. For all
+$D\in[-1/2,1/2]$ and $x\in[0,1]$,
+\[
+\psi(D,x)-\psi(D,\ell)+\delta\,\E\Phi(D')-\Phi(D)\le-\varepsilon|x-\ell|,\qquad \varepsilon=\frac1{1000},
+\]
+where $D'$ is the next bond difference. The inequality splits into $324$
+univariate rational inequalities, each certified by nonnegative Bernstein
+coefficients. Summing it over rounds telescopes the potential and bounds every
+multi-round deviation by the payoff of $\ell$-honesty. Ownership up to $1/2000$
+uses part of the margin $\varepsilon$, and skipping the evaluation loses at
+least $\varepsilon(1-2\ell)/2$ per round, which covers the cost. For part~(i),
+a finite run of rounds in which the deviator's signal is $1$ and the others'
+are $0$ pushes $D$ toward its honest maximum, where the payoff's right
+derivative in $x$ at $x=\ell$ is positive for every $\ell\in(0,2/5]$; the case
+$\ell=0$ fails in the first round. For part~(iii), when the others submit $1/2$
+a deviator's current share of each miner never exceeds $1/n$, so no deviation
+earns more than $V/n$ per round in validator pay. A reflection argument bounds
+what a deviator gains through its ownership, and the ownership share this
+equilibrium tolerates is
+\[
+\frac VM\cdot\frac{2\alpha(n-1)}{n}\cdot\frac{1-\delta(1-\alpha)/(2n-1)}{1-\delta(1-\alpha)}=\frac{8218}{8175}>1.\qedhere
+\]
+\end{proof}
+
+The term $(1-\alpha)D(I-\frac12)$ explains part~(i). A validator whose bonds
 lean toward miner $1$ by $D$ is paid like an owner of a share
 $(1-\alpha)DV/M$ of miner $1$, so its old bonds act as ownership of the miners
 it has backed. Along honest play the lean reaches
@@ -745,13 +780,13 @@ weights keep the lean small.
 
 \subsection{Unequal stake}
 
-Let validator $i$ hold positive stake share $\varphi_i>0$, with $\sum_i\varphi_i=1$. The
+Let validator $i$ hold stake share $\varphi_i$, with $\sum_i\varphi_i=1$. The
 allocation now depends on the reports through the stake that reports $1$,
 $a=f(\sum_i\varphi_ir_i)$, with $f$ nondecreasing and $f(1-z)=1-f(z)$. Payments
 may depend on identities: $v_i(r)\ge0$, $\sum_iv_i(r)=V$ for every report
 profile $r$, and $v_i(r)=v_i(\mathbf 1-r)$. Validator $i$ has its own premium
-$G_i(v)=\E[v_i(s)]-\E[v_i(1,s_{-i})]$ and coordinate influence $H_i(a)$
-as in Section~\ref{sec:model}. The argument of Lemma~\ref{lem:ic} gives the constraint
+$G_i(v)$ and influence $H_i(a)$, defined as in Section~\ref{sec:model}, and the
+argument of Lemma~\ref{lem:ic} gives the constraint
 $\eta+\frac12\omega MH_i(a)\le G_i(v)$ for each $i$. Which premium vectors can
 a fixed budget deliver?
 
@@ -772,11 +807,10 @@ premium $R_j$ that only its members can receive; a group of size $k$ can draw
 on every such majority it meets. Combined with a decomposition of stake-based
 allocations into threshold rules, Theorem~\ref{thm:capacity} turns the frontier
 under unequal stake into a linear program with an explicit payment
-construction. With three validators, one holding at least half the stake and
-the other two equal, let $0\le\eta\le Vd^2/6$. For $\omega>0$ the closed form is
-$Q^*=\frac12+\frac d2(1+pq)\min\{1,(Vd^2-6\eta)/(\omega M(\frac12+3pq))\}$;
-at $\omega=0$ it is $\frac12+\frac d2(1+pq)$, and above the cost bound no rule
-is feasible (Appendix~\ref{app:extensions}). In the running example the largest validator lowers the achievable quality from
+construction. With three validators and one validator holding at least half the
+stake, the program has the closed form (Appendix~\ref{app:extensions})
+$Q^*=\frac12+\frac d2(1+pq)\min\{1,(Vd^2-6\eta)/(\omega M(\frac12+3pq))\}$; in
+the running example the largest validator lowers the achievable quality from
 $27/32$ to $51/64$, and the ownership threshold becomes $4/17$.
 
 Yuma divides the validator budget among the winning side in proportion to
@@ -789,23 +823,19 @@ premium up to $C_1=Vd^2/2=V/8$.
 
 \subsection{Persistence}
 
-Now the state is a stationary binary symmetric Markov chain, with uniform
-initial state and transition probability
-$\Pr[\theta_{t+1}=\theta_t\mid\theta_0,\ldots,\theta_t]=(1+\rho)/2$
-for $\rho\in[0,1)$. Signals follow Section~\ref{sec:model}. In each round validators may evaluate again
+Now the better miner changes over rounds: $\Pr[\theta_{t+1}=\theta_t]=(1+\rho)/2$
+for a persistence $\rho\in[0,1)$. In each round validators may evaluate again
 at cost $\eta>0$, reports become public after the round, and the rule is a
 fixed element of $\Rset$ applied to the current round's reports. Validators
 discount the future and may deviate using their entire private and public
 history.
 
 \begin{theorem}[Frontier with persistence]\label{thm:memory}
-At $\delta=0$, feasibility is $\eta\le\Gs$ and Theorem~\ref{thm:frontier} gives
-the frontier. For $\delta>0$, let $\Lambda=(p/q)^n$ and $\Pi\in[1/2,1)$ solve
+Let $\Lambda=(p/q)^n$ and let $\Pi\in[1/2,1)$ solve
 $\Pi=\frac{1-\rho}2+\rho\frac{\Lambda\Pi}{1+(\Lambda-1)\Pi}$.
 If $\Pi\ge p$, no rule of this kind supports honest evaluation. If $\Pi<p$, let
 $G_\rho=2(p-\Pi)\Gs/d$; honest evaluation can be supported if and only if
-$\eta\le G_\rho$. On this feasible domain the largest quality is
-$Q^*_\rho(0)=\Qmaj$ at zero ownership; for $\omega>0$ it is
+$\eta\le G_\rho$, and then the largest quality is
 \[
 Q^*_\rho(\omega)=\frac12+\Bigl(\Qmaj-\frac12\Bigr)\min\Bigl\{1,\frac{G_\rho-\eta}{\omega Mb\,(p-d\Pi)}\Bigr\},
 \]
@@ -819,7 +849,7 @@ The number $\Pi$ is the most confident belief a validator can hold before
 evaluating, reached after long runs of unanimous reports. A validator whose
 belief is $\pi$ gains $2(p-\pi)G(v)/d$ from evaluating, which vanishes as $\pi$
 approaches $p$: at that point a fresh signal can no longer overturn what the
-history already says. For $\delta>0$, the most confident history binds. In
+history already says. The constraint binds at the most confident history. In
 the running example $\rho_c=41/80$, so fresh evaluation stops paying once the
 better miner stays better with probability $(1+\rho_c)/2=121/160$.
 
@@ -1029,9 +1059,8 @@ the validator's weight on miner $1$ is clipped away, miner $0$ receives $M$,
 and the validator holds $(1-x)/(n-k-x)$ of miner $0$. When $k>m$, it holds
 $x/(k+x)$ of miner $1$, which receives $M$. When $k=m$, its weight $x$ is the
 median on miner $1$, the other $m$ supporters of miner $1$ are clipped to $x$,
-miner $1$ receives $xM$, and the validator holds $1/(m+1)$ of each miner
-with positive clipped weight. At $x=0$ or $1$, the zero column contributes
-nothing; the payment is still $V/(m+1)$. This gives Table~\ref{tab:cases}. The validator's signal-$0$ gain of weight $x$ over
+miner $1$ receives $xM$, and the validator holds $1/(m+1)$ of each miner. This
+gives Table~\ref{tab:cases}. The validator's signal-$0$ gain of weight $x$ over
 weight $0$ is
 \[
 F_\beta(x)=Vx\Bigl[\sum_{k>m}\frac{w_k}{k+x}-\sum_{k<m}\frac{w_k(n-k-1)}{(n-k)(n-k-x)}\Bigr]+\beta Mw_mx,
@@ -1083,21 +1112,18 @@ The pieces agree at the interfaces, and $v_C(\ell)=1/3$. With $V=M$ and
 ownership $\beta$, the gain of weight $x$ over weight $\ell$ is
 $V\{v(x)-v(\ell)+\beta[i(x)-i(\ell)]\}$. Since $i$ increases in $x$, the worst
 ownership is $+\omega$ for moves to the right and $-\omega$ for moves to the
-left.
+left, and we check the three intervals in turn.
 
-\emph{Necessary bound.} On the middle interval, with $\beta=\omega$, the derivative of the gain is
+On the middle interval, with $\beta=\omega$, the derivative of the gain is
 \[
 \frac{u(-2+3\omega\ell)}{(3-x+\ell)^2}+\frac{t(2+3\omega\ell)}{(2+\ell+x)^2}+\frac{2\omega t}{1+\ell}.
 \]
-At $x=\ell$ its coefficient of $\omega$ is positive. A necessary condition
-for equilibrium is therefore $\omega\le C_C(\ell)$, where
+The first coefficient is negative and the second positive, so the derivative
+strictly decreases in $x$, and it is nonpositive on $[\ell,1-\ell]$ exactly when
+it is nonpositive at $x=\ell$, that is, when $\omega\le C_C(\ell)$ with
 \[
 C_C(\ell)=\frac{2u/9-t/[2(1+\ell)^2]}{u\ell/3+3\ell t/[4(1+\ell)^2]+2t/(1+\ell)} .
 \]
-For $p=3/4$, this bound is $C_C(\ell)=\tau(\ell)\le8/51<1$.
-\emph{Sufficiency.} We henceforth take $0\le\omega\le C_C(\ell)$.
-The middle derivative then has a negative first coefficient and a positive
-second coefficient, so it decreases in $x$ and remains nonpositive.
 On the left interval, with $\beta=-\omega$, the derivative is
 $A_L/(3-\ell+x)^2+B_L/(2+\ell+x)^2$ with $A_L=u[2-3\omega(1-\ell)]$ and
 $B_L=t[4(1+\ell)-\omega(4+\ell)]\ge3t\ell$. If $A_L\ge0$ it is positive. If
@@ -1127,9 +1153,10 @@ Lemma~\ref{lem:inherit} gives
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:default}]
-For parts~(i) and~(ii), we fix the others at $\ell$-honesty with $\ell>0$;
-the zero endpoint is treated separately. We write $r=1-\alpha$ and
-$z=\delta r$, let $B_1,B_0$ be the deviator's
+The Bernstein certificates, the $18$ derivative bounds and the profitable
+deviations are in the replication package; here we assemble the argument.
+Throughout, the other two validators are $\ell$-honest and we follow one
+deviator. We write $r=1-\alpha$ and $z=\delta r$, let $B_1,B_0$ be the deviator's
 bonds, and set $S=B_1+B_0$ and $D=B_1-B_0$. For weight $x$ and a count $k$ of
 other reports for miner $1$, let $I(x,k)$ be miner $1$'s share and
 $\Delta_j(x,k)$ the deviator's current share of miner $j$. The other validators
@@ -1190,29 +1217,15 @@ $\ell$-honesty, is strictly profitable. For $\ell=0$ the deviation pays in the
 first round: with signal $0$ and equal initial bonds, weight $1/100$ on
 miner $1$ raises the discounted payoff by $53506799/2288569920$.
 
-\emph{Part (iii).} We fix opponents at $1/2$ and take $\beta_i\ge0$ by
-symmetry. Write $Z_j=1/n-B_j$, $Z=Z_1+Z_0$, and $I=1/2+\sigma\xi$, where
-$\sigma\in\{-1,1\}$ and $0\le\xi\le\bar\xi=1/(4n-2)$. Clipping gives fresh
-shares $1/n$ and $1/n-\chi\xi/(1-2\xi)$, $\chi=4(n-1)/n$, on the favored
-and other miner. Thus $Z_j\ge0$ and $Z'=rZ+\alpha\chi\xi/(1-2\xi)$.
-We simulate any strategy from the same observations and randomization,
-keeping acquisition choices but reflecting reports toward miner $1$.
-Fixed opponents make this implementable. Reflection preserves $Z$ and sets
-$Z_1=0$; its payoff advantage is
-$2V\xi Z_1'\ge0$ if $\sigma=1$, and $2\xi(VZ_0'+\beta_iM)\ge0$ otherwise,
-using the original path's updated deficits. For a reflected path the gross
-gain is $g=(\beta_iM-\alpha V\chi/2)\xi-VrZ(1/2-\xi)$.
-We set $\Psi(Z)=-\zeta Z$, $\zeta=Vr(1/2-\bar\xi)/(1-\delta r)$ and
-$\bar\beta=(\alpha V\chi/2+\delta\alpha\zeta\chi)/M$. Then
-\begin{align*}
-g+\delta\Psi(Z')-\Psi(Z)
-&=-VrZ(\bar\xi-\xi)-(\bar\beta-\beta_i)M\xi\\
-&\quad-\frac{2\delta\alpha\zeta\chi\xi^2}{1-2\xi}\le0
-\end{align*}
-for $\beta_i\le\bar\beta$. Since the initial deficits vanish and $\Psi$ is
-bounded, discounted summation excludes every such path; acquisition costs
-only lower its payoff. At the stated parameters,
-$\bar\beta=8218/8175>1$.\qedhere
+\emph{Part (iii).} If the others put weight $\frac12$ on each miner, a
+deviator's current share of each miner is at most $1/n$ whatever its weight,
+and the rate-$\alpha$ average keeps its bonds at most $1/n$. Its validator pay is
+therefore at most $V/n$ per round, which not evaluating and submitting $\frac12$
+attains. A reflection argument bounds the gain from ownership, and with $n=3$,
+$\alpha=\frac1{10}$, $\delta=\frac{99}{100}$ and $V=M$ the tolerated ownership is
+\[
+\frac VM\cdot\frac{2\alpha(n-1)}{n}\cdot\frac{1-\delta(1-\alpha)/(2n-1)}{1-\delta(1-\alpha)}=\frac{8218}{8175}>1.\qedhere
+\]
 \end{proof}
 
 \section{Proofs for Section~\ref{sec:extensions}}
@@ -1229,9 +1242,7 @@ c_j=\frac d4\bigl(p^{j-1}q^{n-j}-q^{j-1}p^{n-j}\bigr),
 zero for $j=m+1$ and positive for $j\ge m+2$, and which is negative for
 $i\notin W$. Moving a minority member's payment to the majority therefore
 weakly raises every premium, so each set $W$ with $|W|=j\ge m+2$ contributes a
-resource $2Vc_j=R_j$ that only its members can receive. Majority sharing
-splits these resources symmetrically, so $C_n=n\Gs$ by Lemma~\ref{lem:rent}.
-A set $T$ of $k$
+resource $2Vc_j=R_j$ that only its members can receive. A set $T$ of $k$
 validators can draw only on the sets $W$ that meet it, and there are
 $\binom nj-\binom{n-k}{j}$ of them of each size $j$; this proves necessity. For
 sufficiency we fix weights $z\ge0$. The largest $z$-weighted premium is
@@ -1240,23 +1251,20 @@ $z_{(1)}\ge\dots\ge z_{(n)}\ge z_{(n+1)}=0$ gives
 \[
 \sum_WR_{|W|}\max_{i\in W}z_i=\sum_{k=1}^{n}\bigl(z_{(k)}-z_{(k+1)}\bigr)C_k .
 \]
-If $g$ satisfies every subset condition, $z\cdot g$ is at most this value
-for every $z\ge0$. The nonnegative vectors dominated by resource allocations
-form a compact downward-closed polytope; separation therefore gives flows
-$f_{W,i}\ge0$ with $\sum_{i\in W}f_{W,i}\le R_{|W|}$ and
-$\sum_{W\ni i}f_{W,i}\ge g_i$. We distribute unused resources within each $W$
-and pay its members $f_{W,i}/(2c_{|W|})$, with zero to others, on both paired
-profiles. For $|W|=m+1$, we instead pay each majority member $V/(m+1)$.
-These payments are label-symmetric and exhaust every profile's budget;
-minimal majorities contribute zero premium, so
+If $g$ satisfies every subset condition, $z\cdot g$ is at most this value for
+every $z\ge0$. The deliverable premium vectors form a compact, downward-closed
+polytope, so a vector outside it is separated by a hyperplane with a
+nonnegative normal, which the display rules out. Hence there is a flow
+$f_{W,i}\ge0$ from each $W$ to its members with $\sum_{W\ni i}f_{W,i}\ge g_i$.
+Setting $v_i=f_{W,i}/(2c_{|W|})$ on the two profiles with majority $W$, we obtain
 \[
 G_i(v)=\sum_{W\ni i}f_{W,i}\ge g_i .\qedhere
 \]
 \end{proof}
 
 \paragraph{One validator with at least half the stake.} Let $n=3$, let
-validator $1$ hold stake $\frac12\le\varphi_1<1$ and the other two equal
-positive stakes, with common $\eta$ and $\omega$, and write $t=pq$. Averaging over the two small
+validator $1$ hold stake $\varphi_1\ge\frac12$ and the other two equal stakes,
+with common $\eta$ and $\omega$, and write $t=pq$. Averaging over the two small
 validators keeps quality and every constraint, so an allocation is described
 by $0\le a_0\le a_1\le a_2\le\frac12$, miner $1$'s share when validator $1$
 reports $0$ and none, one or both small validators report $1$; the other
@@ -1271,55 +1279,48 @@ where $H_1$ and $H_S$ are the influences of the large and of a small validator.
 With three validators only unanimous profiles create premium, so every
 nonempty capacity equals $C_k=Vd^2/2$ and the subset conditions of
 Theorem~\ref{thm:capacity} reduce to
-$3\eta+\frac12\omega M(H_1+2H_S)\le Vd^2/2$. Thus no rule is feasible
-if $\eta>Vd^2/6$; we now assume $0\le\eta\le Vd^2/6$.
-For $\varphi_1>1/2$, the allocation polytope has vertices $(\frac12,\frac12,\frac12)$, $(0,0,0)$, $(0,0,\frac12)$ and
+$3\eta+\frac12\omega M(H_1+2H_S)\le Vd^2/2$. The allocations form a polytope
+with vertices $(\frac12,\frac12,\frac12)$, $(0,0,0)$, $(0,0,\frac12)$ and
 $(0,\frac12,\frac12)$, whose pairs (quality gain over one half divided by $d$,
 total influence $H_1+2H_S$) are $(0,0)$, $(\frac12,1)$,
 $(\frac{1+t}2,\frac12+3t)$ and $(\frac{1-t}2,\frac32-3t)$. The third vertex has
 the highest quality gain and the highest ratio of gain to influence; its cross
 products with the second and fourth differ by nonnegative multiples of $1-4t$.
-Mixing it with the even split is therefore optimal. Both vertices lie on
-the face $a_2=1/2$, so the same mixture is feasible and optimal at
-$\varphi_1=1/2$. If $\omega=0$, its undamped quality is optimal for every
-feasible cost. For $\omega>0$, the constraint gives
+Mixing it with the even split is therefore optimal, and the constraint gives
 \[
 Q^*=\frac12+\frac{d(1+t)}2\min\Bigl\{1,\frac{Vd^2-6\eta}{\omega M(\frac12+3t)}\Bigr\}.
 \]
 
 \begin{proof}[Proof of Theorem~\ref{thm:memory}]
-At $\delta=0$, only the initial static game counts. For $\delta>0$, we bound
-belief $\pi$. Each round reveals at most
-$n$ fresh signals, giving likelihood ratio in $[\Lambda^{-1},\Lambda]$.
-The Markov transition confines $\pi$ to $[1-\Pi,\Pi]$; unanimous honest
-histories approach both endpoints. A blind report $1$ has affine validation
-pay $W_1(\pi)$, with $W_1(1/2)=V/n-G(v)$ and $W_1(p)=V/n$ by symmetry.
-Its miner-allocation gain is $(p-d\pi)H(a)$, giving
-$2(p-\pi)G(v)/d\ge\eta+\omega M(p-d\pi)H(a)$.
-The label-flipped constraint covers report $0$. Blind-report losses equal
-probability-weighted conditional misreport losses, so neither acquired
-misreports nor mixtures gain.
-
-For fixed $\beta_i$, honest flow payoff is
-$V/n-\eta+\beta_iM[1-Q+(2Q-1)\pi]$, $Q=Q(a)$.
-Iterating affine Markov prediction and discounting therefore gives an
-affine bounded honest continuation value $U(\pi)$.
-For every current policy, $\E[\pi'\mid\text{history}]=(1-\rho)/2+\rho\pi$,
-so affine $U$ makes expected continuation independent of acquisition and
-reporting. The current constraints give
-$\E[u_i+\delta U(\pi')\mid\text{history}]\le U(\pi)$.
-Bounded $U$ lets this telescope for arbitrary randomized history-dependent
-deviations. A strict endpoint violation yields a profitable one-round
-deviation at a finite unanimous history, followed by honest play.
-
-Feasibility implies $G(v)\ge\eta>0$. The ratio
+We first bound what a validator can know. Before a new evaluation, its belief
+$\pi$ that miner $1$ is better combines, from each past round, at most $n$
+conditionally independent signals:
+the other validators' reports and at most one signal of its own. The likelihood
+ratio from one round lies in $[\Lambda^{-1},\Lambda]$, so with the Markov
+transition the belief stays in $[1-\Pi,\Pi]$ under every deviation, and runs of
+unanimous honest reports approach both ends. Because the rule ignores history,
+a deviation changes future payoffs only through this belief, and the
+equilibrium conditions are the static ones at each belief. Let $W_1(\pi)$ be the
+expected payment of reporting miner $1$ blindly at belief $\pi$. It is affine
+in $\pi$, and it equals $V/n$ at $\pi=p$, because the belief after one's own
+signal $1$ is $p$ and honest pay given that signal is $V/n$ by symmetry. Hence
+\[
+\frac Vn-W_1(\pi)=\frac{2(p-\pi)}{d}\,G(v).
+\]
+Reporting miner $1$ blindly raises its expected share by
+$(\pi q+(1-\pi)p)H(a)=(p-d\pi)H(a)$ over honest evaluation, so the constraint at
+belief $\pi$ is $2(p-\pi)G(v)/d\ge\eta+\omega M(p-d\pi)H(a)$. The ratio
 $[2(p-\pi)G(v)/d-\eta]/(p-d\pi)$ has derivative
-$-(4pqG(v)/d+d\eta)/(p-d\pi)^2<0$, so $\Pi$ binds.
-If $\Pi\ge p$, positive cost is infeasible. Otherwise
-Lemmas~\ref{lem:rent} and~\ref{lem:influence} give the frontier, attained by
-damped majority and majority sharing; at $\omega=0$, full majority is feasible
-exactly when $\eta\le G_\rho$. Setting $\Pi=p$ in its fixed-point equation gives
-$\rho_c=d(p^{n+1}+q^{n+1})/(p^{n+1}-q^{n+1})$.\qedhere
+$-(4pqG(v)/d+d\eta)/(p-d\pi)^2<0$, so the binding belief is $\pi=\Pi$. If
+$\Pi\ge p$ the left side is nonpositive there, which rules out $\eta>0$.
+Otherwise the constraint at $\Pi$ and Lemma~\ref{lem:rent} give
+$\omega M(p-d\Pi)H(a)\le2(p-\Pi)G(v)/d-\eta\le G_\rho-\eta$, and
+Lemma~\ref{lem:influence} turns this bound on $H(a)$ into the bound
+$Q^*_\rho(\omega)$ on quality, which the damped majority rule with majority
+sharing attains. Setting $\Pi=p$ in the fixed-point equation gives
+\[
+\rho_c=d\,\frac{p^{n+1}+q^{n+1}}{p^{n+1}-q^{n+1}}.\qedhere
+\]
 \end{proof}
 
 \section{Replication details}
@@ -1381,5 +1382,4 @@ No fallback occurs in the softmax sample. Quality is set to zero when
 miner emission vanishes; the data also report best-miner income
 relative to total emission.
 Replication package: \href{https://github.com/submissionrepo/bittensor-yuma-replication}{GitHub}.
-The package includes exact/symbolic checks and independent LLM audits.
 \end{document}

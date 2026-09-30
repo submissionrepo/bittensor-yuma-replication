@@ -1,10 +1,10 @@
 # Paper A: default memory
 
-Audit the current manuscript statements and proofs, without repairing them. The full definitions, equation labels, model qualifications and surrounding mathematical claims are in `repaired_20260930.refs/paper.tex` (resolve as the sibling reference directory of this problem file). The blueprint transcribes the selected environments verbatim; paper.tex is authoritative if extraction creates ambiguity. All applicable model definitions and hypotheses from the paper are part of the problem. Do not assume another unreviewed mathematical result is established; check its supplied proof where needed. Introductory context and empirical/software fidelity claims are outside this proof audit. Audit the mathematical claims and reductions associated with these results, including claims made immediately after the statements. Do not read any ledger, factgraph, past verdict, unrelated notes or files outside Rethlas. Do not rerun existing certified computations.
+Audit the current manuscript statements and proofs, without repairing them. The full definitions, equation labels, model qualifications and surrounding mathematical claims are in `current_20260930.refs/paper.tex` (resolve as the sibling reference directory of this problem file). The blueprint transcribes the selected environments verbatim; paper.tex is authoritative if extraction creates ambiguity. All applicable model definitions and hypotheses from the paper are part of the problem. Do not assume another unreviewed mathematical result is established; check its supplied proof where needed. Introductory context and empirical/software fidelity claims are outside this proof audit. Audit the mathematical claims and reductions associated with these results, including claims made immediately after the statements. Do not read any ledger, factgraph, past verdict, unrelated notes or files outside Rethlas. Do not rerun existing certified computations.
 
 Selected manuscript labels: thm:default.
 
-The complete candidate proof is in `reasoning/results/bittensor_paper_a/default_memory_20260930/attempt2/blueprint.md`. All manuscript inputs are in `reasoning/data/bittensor_paper_a/repaired_20260930.refs/`. This is an independent LLM audit, not formal machine verification.
+The complete candidate proof is in `reasoning/results/bittensor_paper_a/default_memory_20260930/blueprint.md`. All manuscript inputs are in `reasoning/data/bittensor_paper_a/current_20260930.refs/`. This is an independent LLM audit, not formal machine verification.
 
 ## Established algebraic premises
 
@@ -18,13 +18,7 @@ P3 (established layers: exact, sympy): The dynamic pooling potential residual ex
 
 P4 (established layers: exact, sympy): Under classic zero-column post-EMA normalization, n=3,p=3/4,alpha=1/10,delta=99/100,rho=0,initial B=1/3 and fixed extreme future reports, a zero-owner validator with signal 0 gains 53506799/2288569920 by reporting 1/100 instead of 0.
 
-## Repair submission
-
-This is the second submission of the same proof group, after the author's authorized repairs. The original manuscript, packets and first verdict are preserved separately. Audit the actual revised manuscript, including all boundaries; do not silently add arguments.
-
-Additional established premise (exact, sympy): `repair_checks.json` records 14 exact clipping/reflection identities, the affine honest-continuation Bellman identity, a finite binary-channel Bayes identity, and the soft-threshold necessary-bound factorization and Bernstein upper bound. Accept only this displayed algebra. The strategy simulation, general conditional-expectation argument, filtration assumptions and infinite-horizon conclusion still require proof review.
-
-## Revised statement: thm:default
+## Original statement: thm:default
 
 \begin{theorem}[Default parameters]\label{thm:default}
 Let $n=3$, $p=3/4$, $V=M=1/2$, $\alpha=1/10$, discount factor $\delta=99/100$,
@@ -41,4 +35,3 @@ is a Nash equilibrium for every $\eta\ge0$ and every ownership profile with
 $|\beta_i|\le1$.
 \end{enumerate}
 \end{theorem}
-

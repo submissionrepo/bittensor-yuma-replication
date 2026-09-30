@@ -1,8 +1,12 @@
-# Candidate proof packet: repaired manuscript
+# Candidate proof packet
 
-Verbatim environments and application text. The accompanying full manuscript is authoritative; no additional proof is supplied here.
+Verbatim theorem and proof environments from the manuscript. The complete source is supplied for all definitions and equations. No missing argument has been added.
 
-## lem:ic
+# lemma lem:ic
+
+## statement
+
+Source paper.tex line 438.
 
 \begin{lemma}[Incentive constraint]\label{lem:ic}
 A rule $(a,v)\in\Rset$ supports honest evaluation at cost $\eta$ and ownership
@@ -12,7 +16,9 @@ bound $\omega$ if and only if
 \]
 \end{lemma}
 
-Source paper.tex line 910.
+## proof
+
+Source paper.tex line 941.
 
 \begin{proof}[Proof of Lemma~\ref{lem:ic}]
 We check the two kinds of deviation in turn, starting with a validator who
@@ -40,7 +46,11 @@ implies~\eqref{eq:after}:
 \]
 \end{proof}
 
-## lem:rent
+# lemma lem:rent
+
+## statement
+
+Source paper.tex line 453.
 
 \begin{lemma}[Premium cap]\label{lem:rent}
 Every rule $(a,v)\in\Rset$ has $G(v)\le\Gs$, where
@@ -50,7 +60,9 @@ Every rule $(a,v)\in\Rset$ has $G(v)\le\Gs$, where
 and majority sharing attains $G(v)=\Gs$.
 \end{lemma}
 
-Source paper.tex line 936.
+## proof
+
+Source paper.tex line 967.
 
 \begin{proof}[Proof of Lemma~\ref{lem:rent}]
 By the budget~\eqref{eq:budget} and the equal treatment of validators, the
@@ -74,7 +86,11 @@ and therefore
 \]
 \end{proof}
 
-## lem:influence
+# lemma lem:influence
+
+## statement
+
+Source paper.tex line 466.
 
 \begin{lemma}[Quality per unit of influence]\label{lem:influence}
 Every allocation $a$ of a rule in $\Rset$ satisfies $Q(a)\le\Qmaj$ and
@@ -83,7 +99,9 @@ Q(a)-\frac12\le\frac{\Qmaj-1/2}{b}\,H(a).
 \]
 \end{lemma}
 
-Source paper.tex line 958.
+## proof
+
+Source paper.tex line 989.
 
 \begin{proof}[Proof of Lemma~\ref{lem:influence}]
 The first bound holds profile by profile: given $k$ reports for miner $1$, the
@@ -129,25 +147,28 @@ Q(a)-\frac12&=\sum_{j\le m}c_j\Bigl(Q_j(p)-\frac12\Bigr)
 \end{align*}
 \end{proof}
 
-## thm:frontier
+# lemma thm:frontier
+
+## statement
+
+Source paper.tex line 478.
 
 \begin{theorem}[Frontier]\label{thm:frontier}
-Let $0\le\eta\le\Gs$. For $\omega>0$, the largest quality of a rule in $\Rset$
+Let $0\le\eta\le\Gs$ and $\omega>0$. The largest quality of a rule in $\Rset$
 that supports honest evaluation at cost $\eta$ and ownership bound $\omega$ is
 \[
 Q^*(\omega)=\frac12+\Bigl(\Qmaj-\frac12\Bigr)\min\Bigl\{1,\frac{2(\Gs-\eta)}{\omega Mb}\Bigr\}.
 \]
 The damped majority rule of strength
 $\lambda^*=\min\{1,2(\Gs-\eta)/(\omega Mb)\}$ with majority sharing attains it.
-At $\omega=0$, the optimum is $Q^*(0)=\Qmaj$, attained with $\lambda^*=1$.
 \end{theorem}
 
-Source paper.tex line 494.
+## proof
+
+Source paper.tex line 488.
 
 \begin{proof}
-At $\omega=0$, majority sharing supports full majority allocation because
-$\eta\le\Gs$; Lemma~\ref{lem:influence} gives its optimality. We now take
-$\omega>0$ and combine the three lemmas. A rule that supports honest evaluation has
+We combine the three lemmas. A rule that supports honest evaluation has
 $H(a)\le2(G(v)-\eta)/(\omega M)\le2(\Gs-\eta)/(\omega M)$ by
 Lemmas~\ref{lem:ic} and~\ref{lem:rent}, and Lemma~\ref{lem:influence} then gives
 \[
@@ -163,7 +184,11 @@ $\lambda=\lambda^*$ its quality is
 \]
 \end{proof}
 
-## prop:binary
+# lemma prop:binary
+
+## statement
+
+Source paper.tex line 569.
 
 \begin{proposition}[All-or-nothing weights]\label{prop:binary}
 With bond memory switched off, $0$-honest reports make Yuma pay miners by the
@@ -173,15 +198,17 @@ $\eta+\frac12\omega Mb\le\Gs$; with free evaluation, if and only if
 $\omega\le K$.
 \end{proposition}
 
-Source paper.tex line 587.
+## proof
+
+Source paper.tex line 577.
 
 \begin{proof}
 We take a profile in which $k>m$ validators put all weight on miner $1$. The
 median weight is $1$ on miner $1$ and $0$ on miner $0$. Clipping removes every
 weight the minority placed on miner $1$ and every weight the majority placed on
 miner $0$, so miner $1$ receives $M$ and each majority validator holds a
-current share $1/k$ of miner $1$, while the minority holds nothing of it.
-The zero column for miner $0$ contributes no payment. The payments are $V/k$ to each majority validator and $0$ to the others, and
+current share $1/k$ of miner $1$, while the minority holds nothing of it. The
+payments are $V/k$ to each majority validator and $0$ to the others, and
 unanimity pays $V/n$ each. Lemma~\ref{lem:ic} with $H=b$ and $G=\Gs$ turns the
 equilibrium condition into
 \[
@@ -189,7 +216,11 @@ equilibrium condition into
 \]
 \end{proof}
 
-## lem:inherit
+# lemma lem:inherit
+
+## statement
+
+Source paper.tex line 594.
 
 \begin{lemma}[Yuma stays inside the frontier]\label{lem:inherit}
 Let bond memory be switched off and let $\ell$-honesty be an equilibrium for
@@ -199,7 +230,9 @@ payments is a rule in $\Rset$ that supports honest evaluation. In particular,
 the quality of $\ell$-honesty is at most $Q^*(\omega)$.
 \end{lemma}
 
-Source paper.tex line 1005.
+## proof
+
+Source paper.tex line 1036.
 
 \begin{proof}[Proof of Lemma~\ref{lem:inherit}]
 We first check that the induced allocation is monotone. Under $\ell$-honesty,
@@ -219,4 +252,3 @@ $\ell$-honest validator with the other signal, which is available in Yuma.
 Hence the induced rule supports honest evaluation, and
 Theorem~\ref{thm:frontier} gives $\QY(\ell)\le Q^*(\omega)$.
 \end{proof}
-

@@ -1,8 +1,12 @@
-# Candidate proof packet: repaired manuscript
+# Candidate proof packet
 
-Verbatim environments and application text. The accompanying full manuscript is authoritative; no additional proof is supplied here.
+Verbatim theorem and proof environments from the manuscript. The complete source is supplied for all definitions and equations. No missing argument has been added.
 
-## thm:hedging
+# lemma thm:hedging
+
+## statement
+
+Source paper.tex line 606.
 
 \begin{theorem}[Hedging]\label{thm:hedging}
 Let bond memory be switched off and evaluation be free. For
@@ -20,7 +24,26 @@ if $\omega\le\KY$, where $\KY=VS_n(p)/(Mb)$. Moreover $\KY<K$, and for $n=3$,
 \]
 \end{theorem}
 
-Source paper.tex line 1024.
+## proof
+
+Source paper.tex line 638.
+
+\begin{proof}[Proof sketch]
+We outline the argument; Appendix~\ref{app:yuma} has the details. The
+validator's pay in each case is in Table~\ref{tab:cases}. Against the worst ownership sign, the gain of weight $x$ over weight $0$
+is
+\[
+F(x)=Vx\Bigl[\sum_{k>m}\frac{w_k}{k+x}-\sum_{k<m}\frac{w_k(n-k-1)}{(n-k)(n-k-x)}\Bigr]+\omega Mbx .
+\]
+Every term is strictly concave in $x$ and $F(0)=0$, so weight $0$ is optimal
+exactly when $F'(0)=-VS_n(p)+\omega Mb\le0$. With $\omega=0$ we have
+$F(1)=-2\Gs$, and strict concavity gives $F'(0)>F(1)$, that is,
+\[
+VS_n(p)<2\Gs,\qquad\text{so}\qquad \KY<K.\qedhere
+\]
+\end{proof}
+
+Source paper.tex line 1055.
 
 \begin{proof}[Proof of Theorem~\ref{thm:hedging}]
 Let the validator have signal $0$ and weight $x$ on miner $1$. When $k<m$
@@ -29,9 +52,8 @@ the validator's weight on miner $1$ is clipped away, miner $0$ receives $M$,
 and the validator holds $(1-x)/(n-k-x)$ of miner $0$. When $k>m$, it holds
 $x/(k+x)$ of miner $1$, which receives $M$. When $k=m$, its weight $x$ is the
 median on miner $1$, the other $m$ supporters of miner $1$ are clipped to $x$,
-miner $1$ receives $xM$, and the validator holds $1/(m+1)$ of each miner
-with positive clipped weight. At $x=0$ or $1$, the zero column contributes
-nothing; the payment is still $V/(m+1)$. This gives Table~\ref{tab:cases}. The validator's signal-$0$ gain of weight $x$ over
+miner $1$ receives $xM$, and the validator holds $1/(m+1)$ of each miner. This
+gives Table~\ref{tab:cases}. The validator's signal-$0$ gain of weight $x$ over
 weight $0$ is
 \[
 F_\beta(x)=Vx\Bigl[\sum_{k>m}\frac{w_k}{k+x}-\sum_{k<m}\frac{w_k(n-k-1)}{(n-k)(n-k-x)}\Bigr]+\beta Mw_mx,
@@ -57,7 +79,11 @@ S_3(p)=\frac{2w_0}{9}-\frac{w_2}{2}=\frac{4-21pq}{18},
 \]
 \end{proof}
 
-## prop:soft
+# lemma prop:soft
+
+## statement
+
+Source paper.tex line 679.
 
 \begin{proposition}[Softer weights]\label{prop:soft}
 Let $n=3$, $V=M$, $p=3/4$, bond memory switched off and evaluation free. For
@@ -72,7 +98,9 @@ $\QY(\ell)=\frac12+\frac12\bigl(\frac12-\ell\bigr)\bigl(\frac{13}{16}+\frac{9}{1
 decreases from $27/32$ to $1/2$.
 \end{proposition}
 
-Source paper.tex line 1059.
+## proof
+
+Source paper.tex line 1089.
 
 \begin{proof}[Proof of Proposition~\ref{prop:soft}]
 We fix a validator with signal $0$, write $t=pq$ and $u=1-3t$, and let the
@@ -100,21 +128,18 @@ The pieces agree at the interfaces, and $v_C(\ell)=1/3$. With $V=M$ and
 ownership $\beta$, the gain of weight $x$ over weight $\ell$ is
 $V\{v(x)-v(\ell)+\beta[i(x)-i(\ell)]\}$. Since $i$ increases in $x$, the worst
 ownership is $+\omega$ for moves to the right and $-\omega$ for moves to the
-left.
+left, and we check the three intervals in turn.
 
-\emph{Necessary bound.} On the middle interval, with $\beta=\omega$, the derivative of the gain is
+On the middle interval, with $\beta=\omega$, the derivative of the gain is
 \[
 \frac{u(-2+3\omega\ell)}{(3-x+\ell)^2}+\frac{t(2+3\omega\ell)}{(2+\ell+x)^2}+\frac{2\omega t}{1+\ell}.
 \]
-At $x=\ell$ its coefficient of $\omega$ is positive. A necessary condition
-for equilibrium is therefore $\omega\le C_C(\ell)$, where
+The first coefficient is negative and the second positive, so the derivative
+strictly decreases in $x$, and it is nonpositive on $[\ell,1-\ell]$ exactly when
+it is nonpositive at $x=\ell$, that is, when $\omega\le C_C(\ell)$ with
 \[
 C_C(\ell)=\frac{2u/9-t/[2(1+\ell)^2]}{u\ell/3+3\ell t/[4(1+\ell)^2]+2t/(1+\ell)} .
 \]
-For $p=3/4$, this bound is $C_C(\ell)=\tau(\ell)\le8/51<1$.
-\emph{Sufficiency.} We henceforth take $0\le\omega\le C_C(\ell)$.
-The middle derivative then has a negative first coefficient and a positive
-second coefficient, so it decreases in $x$ and remains nonpositive.
 On the left interval, with $\beta=-\omega$, the derivative is
 $A_L/(3-\ell+x)^2+B_L/(2+\ell+x)^2$ with $A_L=u[2-3\omega(1-\ell)]$ and
 $B_L=t[4(1+\ell)-\omega(4+\ell)]\ge3t\ell$. If $A_L\ge0$ it is positive. If
@@ -142,4 +167,3 @@ Lemma~\ref{lem:inherit} gives
 \QY(\ell)=\frac12+d\Bigl(\frac12-\ell\Bigr)\Bigl(1-t+\frac{3t}{1+\ell}\Bigr).\qedhere
 \]
 \end{proof}
-

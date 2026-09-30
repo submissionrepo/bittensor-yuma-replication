@@ -1,99 +1,41 @@
-# Findings summary
+# Repairs and original findings
 
-This is an editorial English summary of the original independent LLM audit
-reports. The linked `verification.json` files are the unedited verdicts and
-remain the authoritative audit outputs. No proof was repaired or resubmitted.
-Repeated findings are retained in the original reports because they affect
-different manuscript claims.
+This is an editorial summary of the authorized manuscript repairs. The
+[verification index](README.md) gives the current results; each linked JSON
+report is the independent verifier's unedited verdict. The first submission's
+manuscript, proof packets and failed reports remain in
+`second_layer/history/attempt1/`. A later pass concerns the revised statement
+and premises, not the original text.
 
-## Static frontier and binary Yuma
+The abstract, introduction, and all material before the Model section are
+unchanged. Other manuscript changes concern the reported mathematical issues
+and the disclosure of the verification scope beside the replication link.
+The paper remains 12 pages with the original font and margins; redundant
+main-text sketches were removed while the complete appendix proofs remain.
 
-[Original report](second_layer/static/verification.json).
+| Group | Original finding | Repair and effect on scope |
+|---|---|---|
+| Static | Zero clipped columns were undefined; the inheritance lemma used an undefined zero-ownership frontier. | Define zero current shares and post-EMA normalization of positive bond columns. State and prove the zero-ownership branch, including the maximal feasible cost. The positive-ownership formula is unchanged. |
+| Continuous | The strict threshold comparison failed at one validator; soft-weight sign arguments silently assumed bounded ownership; endpoint payments were undefined. | Require odd `n >= 3`, which strengthens the model's written domain. Derive the necessary ownership bound before using it in the sufficiency argument, retaining the full `omega >= 0` domain. Apply the explicit zero-column convention at the endpoints. |
+| Default memory | Fresh errors across rounds and zero-column normalization were missing; the general reflection argument was absent. | Specify conditional independence across agents and rounds given the exogenous state path, which strengthens the written signal assumptions. Define the zero-column update. Supply an implementable reflection of arbitrary strategies, bond-deficit comparisons, and the discounted potential argument. The three equilibrium conclusions retain their stated numerical parameters. |
+| Capacity | Payment construction omitted budget completion and zero-coefficient profiles; a vertex was infeasible at half stake; zero stake, infeasible costs, and zero ownership were mishandled. | Complete all profile payments, restrict the four-vertex description to stake strictly above one half, and show the optimizer remains on the feasible face at equality. Require positive stakes, an additional hypothesis. Separate feasible costs from the no-rule region and provide the zero-ownership optimum. |
+| Persistence | A one-step retention probability did not imply a Markov process; fresh signals and a continuation-value argument were missing; zero ownership was undefined. | State the stationary binary symmetric Markov kernel and fresh signal law, strengthening the written assumptions. Derive an affine honest-continuation value and telescope the resulting inequality for arbitrary randomized history-dependent deviations. Add the zero-ownership frontier, including the feasible-cost boundary. |
 
-The audit found no error in the main derivations of the three static lemmas
-and the positive-ownership frontier. The complete group did not pass:
+The payment completion and half-stake feasible-face correction use facts
+already present in the original argument. The stochastic-process, committee-size,
+and positive-stake restrictions are explicit additions to its assumptions.
+The reflection and continuation arguments are new proof completions; finite
+replays alone do not establish them.
 
-- The manuscript does not define current shares, bonds, and their payment
-  contribution when just one miner has zero total clipped weight. Binary
-  reports create this case. The all-columns-zero fallback is a different case.
-- The inheritance lemma permits zero ownership, but invokes a frontier
-  defined only for positive ownership and gives no definition of `Q*(0)`.
+The new [repair algebra record](first_layer/records.json) checks the displayed
+reflection, continuation, Bayes, and soft-threshold algebra. The
+[complete first-layer replay](first_layer/replay.md) reruns the existing
+generators after the repairs. Independent LLM proof review remains distinct
+from exact or symbolic computation and from formal theorem-prover verification.
 
-These require explicit boundary definitions and corresponding arguments.
-Restricting ownership to positive values would strengthen the hypotheses.
-
-## Continuous weights
-
-[Original report](second_layer/continuous/verification.json).
-
-- The manuscript does not exclude one validator. At `n=1`, both thresholds
-  are zero, contradicting the claimed strict comparison. The strict claim
-  cannot retain its stated full domain; excluding this case adds a hypothesis.
-- Several sign claims in the softer-weight proof use an unstated ownership
-  range. They are false, for example, at `ell=2/5` and `omega=2`. This is an
-  error in the argument, not a counterexample to the final threshold formula.
-  The necessary and sufficient branches need explicit domains; simply adding
-  `omega <= 1` strengthens the hypotheses.
-- The zero-column definition problem also affects endpoint payments here.
-
-## Default bond memory
-
-[Original report](second_layer/default_memory/verification.json).
-
-The audit accepted the stated first-layer algebraic premises and found no
-algebraic error in state elimination, the convexity extension, or discounted
-summation. Three gaps remain:
-
-- Independent states and within-round conditional independence do not imply
-  the fresh, history-conditional signal law used by the proof. An explicit
-  condition on signals across rounds is an additional hypothesis.
-- The exact endpoint deviation assumes a specified zero-column post-EMA
-  normalization. The manuscript has not defined that process or established
-  its correspondence with the calculation.
-- The pooling argument does not supply a general, implementable reflection
-  of arbitrary history-dependent strategies, with the required bond-state
-  comparison. The potential identity and 256 finite paths do not fill this
-  gap. This needs a complete argument; the audit does not establish whether
-  the final claim must change.
-
-## Unequal-stake capacity and its application
-
-[Original report](second_layer/capacity/verification.json).
-
-- The explicit payment construction leaves resource-budget completion and
-  payments in minimal-majority profiles unstated. The audit classifies these
-  as free completions using coefficient properties already in the passage.
-- At a largest stake of exactly one half, one listed vertex violates the
-  stated tie constraint. Correcting the feasible-face description is free;
-  the selected optimal mixture itself satisfies that constraint.
-- The stake domain does not exclude `(1,0,0)`. In this case quality cannot
-  exceed `p`, whereas the formula gives `51/64 > 3/4` in the stated example.
-  Excluding zero stakes adds a hypothesis; otherwise this endpoint needs a
-  different conclusion.
-- The formula is presented even when evaluation cost exceeds `V*d^2/6`,
-  where the incentive constraints are infeasible. The feasible-cost domain
-  and the no-feasible-rule case must be distinguished.
-- The formula divides by ownership without handling zero ownership,
-  including a `0/0` boundary. A zero-ownership branch is needed; restricting
-  ownership to positive values adds a hypothesis.
-
-## Persistence
-
-[Original report](second_layer/persistence/verification.json).
-
-- A one-step probability of retaining the state does not specify a symmetric
-  Markov process conditional on the entire history. A mixture of permanently
-  constant and permanently alternating state paths satisfies the stated
-  one-step probability while violating the claimed belief bound. Explicit
-  Markov transitions strengthen the written assumptions.
-- The filtering and payment calculations also require a fixed, fresh signal
-  law conditional on history and current state. Within-round independence
-  alone is insufficient; the additional across-round condition is a hypothesis.
-- The proof does not establish why the continuation value of current
-  information drops out of the incentive comparison, or why the resulting
-  one-round constraints rule out arbitrary discounted multiround deviations.
-  This needs a complete argument; it is not a counterexample to the final
-  frontier under suitably specified assumptions.
-- The zero-ownership case, including the feasible-cost boundary, is undefined
-  in the displayed quotient. It needs its own branch; imposing positive
-  ownership instead strengthens the hypotheses.
+A follow-up persistence audit identified the zero-discount endpoint: future
+history deviations have no initial payoff weight when `delta=0`. The final
+theorem explicitly applies the static feasibility bound and frontier there,
+and uses the persistence result for `delta>0`. This preserves the full
+discount domain and the original equilibrium concept. The failed intermediate
+report is retained in `second_layer/history/persistence_attempt2/`.
