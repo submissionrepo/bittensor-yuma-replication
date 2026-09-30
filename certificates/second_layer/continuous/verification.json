@@ -1,9 +1,0 @@
-{
-  "verification_report": {
-    "summary": "已完整重审最终压缩稿中的 thm:hedging、prop:soft、附录证明及关联质量比较，未发现关键错误或证明缺口。n≥3 排除了原严格比较的退化情形；零列约定覆盖端点支付；软权重证明先从必要条件推出 ω≤τ(ℓ)≤8/51，再在该范围内证明全部报告区间的充分性，保留了原有 ω≥0 参数域。结论属于独立 LLM 审查，不是形式化机器验证。",
-    "critical_errors": [],
-    "gaps": []
-  },
-  "verdict": "correct",
-  "repair_hints": ""
-}

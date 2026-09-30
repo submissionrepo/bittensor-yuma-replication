@@ -1,9 +1,0 @@
-{
-  "verification_report": {
-    "summary": "已完整重审最终压缩稿中的 thm:capacity 及半数以上持股应用，未发现关键错误或证明缺口。资源系数、子集容量的必要性与充分性、补足资源后的逐剖面预算支付均成立；最小多数的零系数已单独处理。应用明确要求正持股、限定可行成本，并正确处理恰好半数持股的面及 ω=0 分支。分离步骤符合 [Boyd–Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf) 例 2.20 的条件。本结论属于独立 LLM 审查，不是形式化机器验证。",
-    "critical_errors": [],
-    "gaps": []
-  },
-  "verdict": "correct",
-  "repair_hints": ""
-}
