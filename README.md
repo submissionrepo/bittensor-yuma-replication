@@ -5,10 +5,15 @@ Decentralized AI Evaluation**.
 
 **[Download the complete replication package](https://raw.githubusercontent.com/submissionrepo/bittensor-yuma-replication/main/bittensor-yuma-replication.zip)**
 
-The ZIP contains 88 files (approximately 7.8 MB uncompressed). Source code,
+Source code,
 saved data, exact-arithmetic certificate outputs, and detailed instructions are
-inside the archive. No credentials, private project history, or compiled
+inside the archive. No account credentials, private project history, or compiled
 executables are included.
+
+**[First- and second-layer verification records](certificates/README.md)**
+are also available directly in this repository. The index distinguishes
+exact/symbolic calculations from independent LLM proof audits and links to
+the unedited audit verdicts, reviewed text, and any pass credentials.
 
 ## Getting started
 
@@ -44,6 +49,7 @@ in `research_ideas/probes/bittensor/protocol/README.md` inside the archive.
 
 | Material | Location inside the extracted package |
 |---|---|
+| Verification scope, first-layer records, and second-layer proof audits | `certificates/` |
 | Numerical tables, figure generators, and quoted-number calculations | `research_ideas/bittensor_paper_a/` |
 | Static and dynamic calculations and rational certificates | `research_ideas/probes/bittensor/` |
 | Fixed-point Python epoch, Rust reference source, official fixtures, and differential results | `research_ideas/probes/bittensor/protocol/` |

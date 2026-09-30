@@ -1,0 +1,152 @@
+{
+  "bittensor_static_expanded_20260929": {
+    "statement": "240 specified rational static candidate mechanisms satisfy every original LP constraint. Four new fixed LPs have rational primal-dual optimality certificates after exact support lifting.",
+    "verified": [
+      "exact"
+    ],
+    "evidence": "research_ideas/probes/bittensor/: static_frontier_probe.py; static_frontier_probe.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "All 240 floating optima match the formula to tolerance, but floating agreement and finite candidates do not certify arbitrary n or the economic reduction."
+  },
+  "bittensor_symbolic_frontier_20260929": {
+    "statement": "78 all-p n=3 policy-quality differences have nonnegative Bernstein certificates after branch substitution; symbolic coalition gains/support identities, 22 specified finite-n binomial identities and the dynamic 2x2 resolvent identity vanish exactly.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/: symbolic_frontier_checks.py; symbolic_frontier_checks.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Algebraic scope only. Bernstein z in [0,1], branch variables nonnegative. Does not independently verify the information/equilibrium reductions or arbitrary-n proof."
+  },
+  "bittensor_yuma_endpoint_static_20260929": {
+    "statement": "Twelve specified odd-n,p classic Yuma alpha=1 extreme-report cases give Q=A,G=G*,H=b,omega_Y=K exactly; 48 specified positive-ell comparisons strictly reduce quality and restricted-binary ownership tolerance.",
+    "verified": [
+      "exact"
+    ],
+    "evidence": "research_ideas/probes/bittensor/: yuma_endpoint_probe.py; yuma_endpoint_probe.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Finite rational identities. Not a continuous-ell theorem, dynamic equilibrium or chain fixed-point parity test."
+  },
+  "bittensor_yuma_endpoint_dynamic_20260929": {
+    "statement": "Under classic zero-column post-EMA normalization, n=3,p=3/4,alpha=1/10,delta=99/100,rho=0,initial B=1/3 and fixed extreme future reports, a zero-owner validator with signal 0 gains 53506799/2288569920 by reporting 1/100 instead of 0.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/: yuma_endpoint_probe.py; yuma_endpoint_probe.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Independent symbolic n=3 payoff equals rational profile enumeration; four future transition steps plus exact geometric tail agree. Refutes this candidate signal-only strategy, not all equilibria. Original positive-column formula and credentials unchanged."
+  },
+  "bittensor_continuous_yuma_20260929": {
+    "statement": "Twelve specified odd-n,p alpha=1 extreme-report cases and the n=3 identity S/b=(4-21pq)/(36pq), plus three-piece soft-report continuity identities, recompute exactly.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/yuma_continuous_theory.py; yuma_continuous_theory.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Only displayed algebra and finite cases; not the complete concavity or equilibrium argument."
+  },
+  "bittensor_completion_algebra_20260929": {
+    "statement": "Five soft-report derivative/sign identities, p=3/4 Bernstein interval sign certificates, 21 rational epoch comparisons, and dominant-stake three-person threshold-ratio inequalities passed.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/theory_completion_checks.py; theory_completion_checks.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Scope is the specified identities and polynomial signs, not entire economic equilibrium or stake-capacity reductions."
+  },
+  "bittensor_rent_capacity_support_20260929": {
+    "statement": "27 rational price-vector instances at n=3,5,7 and p=3/5,3/4,9/10 have identical full-profile rent support values, majority-subset resource support values and ranked subset-capacity support values.",
+    "verified": [
+      "exact"
+    ],
+    "evidence": "research_ideas/probes/bittensor/rent_capacity_probe.py; rent_capacity_probe.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Finite identities only, not the universal convex separation or payment construction proof."
+  },
+  "bittensor_stake_rents_20260929": {
+    "statement": "Six specified stake vectors at p=3/4 have rational weighted-majority quality, individual payment rents and influences, with independent conditional report-margin replay. The (3/5,1/5,1/5) alpha=1 Yuma whale has rent -1/40 and influence 1.",
+    "verified": [
+      "exact"
+    ],
+    "evidence": "research_ideas/probes/bittensor/: stake_extension_probe.py; stake_extension_probe.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "Finite no-half-stake-tie environments only. Fixed Yuma payment, not impossibility for all stake-dependent mechanisms."
+  },
+  "bittensor_default_dynamic_potential_exact_20260930": {
+    "statement": "All 324 rational interval inequalities at the stated D endpoints/report intervals/positive-part branches have positive denominators and nonnegative Bernstein coefficients. Eighty-four exact epoch comparisons and the fresh-payment, fresh-share and state-potential identities pass.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/default_dynamic_certificate.py; default_dynamic_certificate.json; default_dynamic_certificate.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "Derived by yuma_default_dynamic; first exact run succeeded. Full state-domain reduction, convexity and infinite-horizon equilibrium are separate unreviewed proofs. Not rerun by the coordinator."
+  },
+  "bittensor_default_dynamic_extensions_exact_20260930": {
+    "statement": "Eighteen allocation derivative bounds, one strict hard-report interval bound and the ell=2/5 ten-round finite-history deviation pass exact algebra. Full discounted gain is 1346965493913734921202558254069/4862851903431954529117440000000000000; positive ownership/cost constants are exact.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/default_dynamic_extensions_certificate.py; default_dynamic_extensions_certificate.json; default_dynamic_extensions_certificate.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "First run succeeded. Does not repeat the preceding 324 checks; no Rethlas review. General finite-history and equilibrium conclusions remain separate proof nodes."
+  },
+  "bittensor_dynamic_pooling_algebra_20260929": {
+    "statement": "The dynamic pooling potential residual exactly equals three nonpositive terms; the ownership cap simplifies to the displayed formula and equals 8218/8175 at n=3,alpha=1/10,delta=99/100,V=M; 256 rational three-period report paths verify the orientation comparison.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/dynamic_pooling_certificate.py; dynamic_pooling_certificate.md",
+    "date": "2026-09-29",
+    "paper": "bittensor_yuma",
+    "note": "General pathwise reflection and infinite-horizon equilibrium proof remain separate; finite paths do not certify all strategies."
+  },
+  "bittensor_dynamic_memoryless_algebra_20260930": {
+    "statement": "Symbolic recomputation proves the stated three-agent rent, majority/extreme cross difference and persistence fixed-point identities; rational substitutions give rho=41/80 at the boundary and Q=101/180 in the specified interior example.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/dynamic_memoryless_probe.py; dynamic_memoryless_probe.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "Algebraic components only; the filter interval, all-history incentive reduction and dynamic frontier remain separate research proofs."
+  },
+  "bittensor_dynamic_general_algebra_20260930": {
+    "statement": "Fifty-two symbolic identities at n=3,5,7,9 give the stated conditional-payment count coefficient, mirrored influence probabilities and general rho_c filter substitution.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/probes/bittensor/dynamic_frontier_general_probe.py; dynamic_frontier_general_probe.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "Finite symbolic instances. The arbitrary-n identity is proved by label symmetry and the budget equation in the research note, not by this finite enumeration."
+  },
+  "bittensor_threshold_table_extension_20260930": {
+    "statement": "63 new rational substitutions of classic equal-stake alpha=1 Yuma thresholds at odd n=11..51 and p in {3/5,3/4,9/10} agree between Fraction and SymPy implementations, with KY<K. Combined with 12 reused old points, p=3/5 has KY<0 at odd n=3..13 but KY>0 at n=15; p=3/4,n=15 has K>1 and KY>1.",
+    "verified": [
+      "exact",
+      "sympy"
+    ],
+    "evidence": "research_ideas/bittensor_paper_a/threshold_table.py; threshold_table.csv; threshold_table.md",
+    "date": "2026-09-30",
+    "paper": "bittensor_yuma",
+    "note": "Finite substitution only; the general equilibrium argument, monotonicity and asymptotic claims are not certified. Twelve old KY values loaded from the saved 20260929 table, not re-verified."
+  }
+}
